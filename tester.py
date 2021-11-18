@@ -6,6 +6,7 @@ import sys
 import glob
 
 path_includes = "inc"
+folder_name = "tester"
 
 class colors:
     HEADER = '\033[95m'
@@ -34,34 +35,34 @@ def main(argv):
 		if opt == "-s" : stack_test = True
 		if opt == "-m" : map_test = True
 		if opt == "-l" : leaks_test = True
-		if opt == "-d" : 
-			if os.path.exists("TESTER_CONTAINERS42/results"):
-				shutil.rmtree("TESTER_CONTAINERS42/results"); 
-			if os.path.exists("TESTER_CONTAINERS42/bin"):
-				shutil.rmtree("TESTER_CONTAINERS42/bin")
+		if opt == "-d" :
+			if os.path.exists(folder_name + "/results"):
+				shutil.rmtree(folder_name + "/results");
+			if os.path.exists(folder_name + "/bin"):
+				shutil.rmtree(folder_name + "/bin")
 	# print("all_test = ", all_test)
 	# print("vector_test = ", vector_test)
 	# print("stack_test = ", stack_test)
 	# print("map_test = ", map_test)
 	# print("leaks_test = ", leaks_test)
 
-	dirs = os.listdir("TESTER_CONTAINERS42/srcs")
+	dirs = os.listdir(folder_name + "/srcs")
 	if "main.cpp" in dirs : dirs.remove("main.cpp")
 	if "tester.py" in dirs : dirs.remove("tester.py")
 	for dir in dirs:
 		if all_test or (vector_test and dir == "vector") or (stack_test and dir == "stack") or (map_test and dir == "map"):
-			sub_dirs = os.listdir("TESTER_CONTAINERS42/srcs/" + dir)
+			sub_dirs = os.listdir(folder_name + "/srcs/" + dir)
 			print(colors.OKBLUE + colors.BOLD + "============\n-> " + dir.upper() + " <-\n============" + colors.END)
 			for sub_dir in sub_dirs:
-				path_srcs_test = "TESTER_CONTAINERS42/srcs/" + dir + "/" + sub_dir
-				path_result = ("TESTER_CONTAINERS42/results/" + dir + "/" + sub_dir).replace('.cpp', '')
-				path_bin = ("TESTER_CONTAINERS42/bin/" + dir + "/" + sub_dir).replace('.cpp', '')
+				path_srcs_test = folder_name + "/srcs/" + dir + "/" + sub_dir
+				path_result = (folder_name + "/results/" + dir + "/" + sub_dir).replace('.cpp', '')
+				path_bin = (folder_name + "/bin/" + dir + "/" + sub_dir).replace('.cpp', '')
 				os.makedirs(path_bin, exist_ok = True)
 				os.makedirs(path_result, exist_ok = True)
 				# if not os.path.exists(path_bin + "_mine") or (os.path.exists(path_bin + "_mine") and os.path.getctime(path_srcs_test) > os.path.getctime(path_bin + "_mine")):
-				subprocess.run(("clang++ -D MINE -Werror -Wall -Wextra TESTER_CONTAINERS42/srcs/main.cpp -ITESTER_CONTAINERS42/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_mine").split(), capture_output=False)
+				subprocess.run(("clang++ -D MINE -Werror -Wall -Wextra " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_mine").split(), capture_output=False)
 				# if not os.path.exists(path_bin + "_std") or (os.path.exists(path_bin + "_std") and os.path.getctime(path_srcs_test) > os.path.getctime(path_bin + "_std")):
-				subprocess.run(("clang++ -Werror -Wall -Wextra TESTER_CONTAINERS42/srcs/main.cpp -ITESTER_CONTAINERS42/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_std").split(), capture_output=False)
+				subprocess.run(("clang++ -Werror -Wall -Wextra " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_std").split(), capture_output=False)
 				with open((path_result + "/stdout_mine"), "w") as outfile:
 					subprocess.run((path_bin + "_mine ").split(), stdout=outfile)
 				with open((path_result + "/stdout_std"), "w") as outfile:
