@@ -6,7 +6,7 @@ import sys
 import glob
 
 path_includes = "inc"
-folder_name = "tester"
+folder_name = "TESTER_CONTAINERS42"
 
 class colors:
     HEADER = '\033[95m'
