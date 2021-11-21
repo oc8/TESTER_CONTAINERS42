@@ -7,6 +7,7 @@ import glob
 
 path_includes = "inc"
 folder_name = "tester"
+flags = "-Wall -Wextra -Werror -std=c++98"
 
 class colors:
     HEADER = '\033[95m'
@@ -60,9 +61,9 @@ def main(argv):
 				os.makedirs(path_bin, exist_ok = True)
 				os.makedirs(path_result, exist_ok = True)
 				# if not os.path.exists(path_bin + "_mine") or (os.path.exists(path_bin + "_mine") and os.path.getctime(path_srcs_test) > os.path.getctime(path_bin + "_mine")):
-				subprocess.run(("clang++ -D MINE -Werror -Wall -Wextra " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_mine").split(), capture_output=False)
+				subprocess.run(("clang++ -D MINE " + flags + " " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_mine").split(), capture_output=False)
 				# if not os.path.exists(path_bin + "_std") or (os.path.exists(path_bin + "_std") and os.path.getctime(path_srcs_test) > os.path.getctime(path_bin + "_std")):
-				subprocess.run(("clang++ -Werror -Wall -Wextra " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_std").split(), capture_output=False)
+				subprocess.run(("clang++ " + flags + " " + folder_name + "/srcs/main.cpp -I" + folder_name + "/inc -I" + path_includes + " " + path_srcs_test + " -o " + path_bin + "_std").split(), capture_output=False)
 				with open((path_result + "/stdout_mine"), "w") as outfile:
 					subprocess.run((path_bin + "_mine ").split(), stdout=outfile)
 				with open((path_result + "/stdout_std"), "w") as outfile:

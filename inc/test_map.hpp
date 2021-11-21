@@ -1,15 +1,20 @@
 #include <iostream>
 #ifdef MINE
-  #include "map.hpp"
-  using namespace ft;
+#include "map.hpp"
+using namespace ft;
 #else
-  #include <map>
-  using namespace std;
+#include <map>
+using namespace std;
 #endif
 
+using std::cout;
+using std::endl;
+
 template <typename C>
-void print_map(C & cont) {
-	for (typename C::iterator it = cont.begin(); it != cont.end(); ++it)
-		std::cout << it->first << "|" << it->second << " ";
-	std::cout << std::endl << "size = " << cont.size() << std::endl;
+void print_map(C &c)
+{
+  for (typename C::iterator it = c.begin(); it != c.end(); ++it)
+    cout << it->first << "|" << it->second << " ";
+  cout << endl
+       << "size = " << c.size() << endl;
 }
