@@ -10,7 +10,7 @@
 template <typename C>
 void print_vec(C & cont) {
 	for (typename C::size_type i = 0; i < cont.size(); i++)
-		std::cout << cont[i] << "|";
+		std::cout << cont[i] << "|" << std::flush;
 	std::cout << std::endl << "size = " << cont.size() << std::endl;
 	std::cout << "capacity = " << cont.capacity() << std::endl << std::endl;
 }
@@ -27,7 +27,7 @@ class NoLeaksPlease {
 			for (int i = 0; i < _n; i++)
 				s[i] = str;
 		};
-		NoLeaksPlease(NoLeaksPlease const & src) : _n(0), s(NULL) { *this = src; } 
+		NoLeaksPlease(NoLeaksPlease const & src) : _n(0), s(NULL) { *this = src; }
 		~NoLeaksPlease() { delete [] s; };
 		int getSize() const { return _n; }
 		std::string getString(int index) const { return s[index]; }

@@ -30,17 +30,25 @@ int test()
 		c2[1] = c[2];
 		cout << "operator==: " << (c == c2) << endl;
 		cout << "operator!=: " << (c != c2) << endl;
-		// cout << "operator<: " << (c < c2) << endl;
-		// cout << "operator>: " << (c > c2) << endl;
-		// cout << "operator<=: " << (c <= c2) << endl;
-		// cout << "operator>=: " << (c >= c2) << endl;
+		cout << "operator<: " << (c < c2) << endl;
+		cout << "operator>: " << (c > c2) << endl;
+		cout << "operator<=: " << (c <= c2) << endl;
+		cout << "operator>=: " << (c >= c2) << endl;
+      c2[-1] = 2;
+		cout << "operator==: " << (c == c2) << endl;
+		cout << "operator!=: " << (c != c2) << endl;
+		cout << "operator<: " << (c < c2) << endl;
+		cout << "operator>: " << (c > c2) << endl;
+		cout << "operator<=: " << (c <= c2) << endl;
+		cout << "operator>=: " << (c >= c2) << endl;
 		c2 = c;
 		cout << "operator==: " << (c == c2) << endl;
 		cout << "operator!=: " << (c != c2) << endl;
-		// cout << "operator<: " << (c < c2) << endl;
-		// cout << "operator>: " << (c > c2) << endl;
-		// cout << "operator<=: " << (c <= c2) << endl;
-		// cout << "operator>=: " << (c >= c2) << endl;
+		cout << "operator<: " << (c < c2) << endl;
+		cout << "operator>: " << (c > c2) << endl;
+		cout << "operator<=: " << (c <= c2) << endl;
+		cout << "operator>=: " << (c >= c2) << endl;
+      cout << endl;
 
 	}
    cout << "----------> constructors <----------" << endl;
@@ -72,16 +80,16 @@ int test()
    cout << "----------> erase <----------" << endl;
    {
       Map c = ::basic();
-      //    c.erase(1);
-      //    c.erase(2);
-      //    print_map<Map>(c);
-      //    c[5] = c.erase(0);
-      //    print_map<Map>(c);
-      //    c[0] = 1000;
-      //    c[2] = 999999;
-      //    c[4] = c.erase(10000);
-      //    c[3] = c.erase(2);
-      //    print_map<Map>(c);
+      cout << "erase 1: " << c.erase(1) << endl;
+      cout << "erase 2: " << c.erase(2) << endl;
+      print_map<Map>(c);
+      cout << "erase 0: " << c.erase(0) << endl;
+      print_map<Map>(c);
+      c[0] = 1000;
+      c[2] = 999999;
+      cout << "erase 1000: " << c.erase(1000) << endl;
+      cout << "erase 2: " << c.erase(2) << endl;
+      print_map<Map>(c);
    }
 
    cout << "----------> swap <----------" << endl;
