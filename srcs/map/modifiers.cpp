@@ -13,38 +13,30 @@ Map basic()
 
 int test()
 {
-   cout << "----------> at & [] <----------" << endl;
+   cout << "----------> [] <----------" << endl;
    {
       Map c = ::basic();
-      c[0] = c.at(1);
-      c.at(2) = c[3];
-      c.at(2) = c.at(0);
+      c[0] = c[1];
+      c[2] = c[3];
+      c[2] = c[0];
       c[10] = c[9];
       c[102];
-      try
-      {
-         c.at(101);
-      }
-      catch (std::exception &e)
-      {
-         cout << e.what() << endl;
-      }
       print_map<Map>(c);
    }
    cout << "----------> operators <----------" << endl;
    {
-		// Map c = ::basic();
-		// Map c2;
-		// c2[0] = c[1];
-		// cout << "operator==: " << (c == c2) << endl;
-		// cout << "operator!=: " << (c != c2) << endl;
+		Map c = ::basic();
+		Map c2 = ::basic();
+		c2[1] = c[2];
+		cout << "operator==: " << (c == c2) << endl;
+		cout << "operator!=: " << (c != c2) << endl;
 		// cout << "operator<: " << (c < c2) << endl;
 		// cout << "operator>: " << (c > c2) << endl;
 		// cout << "operator<=: " << (c <= c2) << endl;
 		// cout << "operator>=: " << (c >= c2) << endl;
-		// c2 = c;
-		// cout << "operator==: " << (c == c2) << endl;
-		// cout << "operator!=: " << (c != c2) << endl;
+		c2 = c;
+		cout << "operator==: " << (c == c2) << endl;
+		cout << "operator!=: " << (c != c2) << endl;
 		// cout << "operator<: " << (c < c2) << endl;
 		// cout << "operator>: " << (c > c2) << endl;
 		// cout << "operator<=: " << (c <= c2) << endl;
@@ -95,12 +87,12 @@ int test()
    cout << "----------> swap <----------" << endl;
    {
       Map c = ::basic();
-      Map d;
-      d[56] = 3;
-      d[4] = 10;
-      c.swap(d);
+      Map c2;
+      c2[56] = 3;
+      c2[4] = 10;
+      c.swap(c2);
       print_map<Map>(c);
-      print_map<Map>(d);
+      print_map<Map>(c2);
    }
    cout << "----------> clear & empty <----------" << endl;
    {
