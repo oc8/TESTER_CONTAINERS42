@@ -13,7 +13,16 @@ using std::endl;
 template <typename C>
 void print_map(C &c)
 {
-  for (typename C::iterator it = c.begin(); it != c.end(); ++it)
+  for (typename C::reverse_iterator it = c.begin() + 1; it != c.end(); --it)
+    cout << it->first << "|" << std::flush << it->second << " " << std::flush;
+  cout << endl
+       << "size = " << c.size() << endl;
+}
+
+template <typename C>
+void print_map(const C &c)
+{
+  for (typename C::const_iterator it = c.begin(); it != c.end(); ++it)
     cout << it->first << "|" << std::flush << it->second << " " << std::flush;
   cout << endl
        << "size = " << c.size() << endl;
