@@ -3,11 +3,42 @@
 typedef map<int, int> Map;
 typedef pair<int, int> Pair;
 
+/*
+            10
+           /  \
+          5    21
+         / \   / \
+        2   8 15  30
+       /         /  \
+      1        25    42
+              / \    / \
+            23  27  35  84
+             \    \     /
+             24   29   43
+                  /
+                 28
+*/
 Map basic()
 {
    Map c;
-   for (int i = 0; i < 5; ++i)
-      c[i] = i;
+   c[10] = 10;
+   c[5] = 5;
+   c[21] = 21;
+   c[2] = 2;
+   c[8] = 8;
+   c[15] = 15;
+   c[30] = 30;
+   c[1] = 1;
+   c[25] = 25;
+   c[42] = 42;
+   c[23] = 23;
+   c[27] = 27;
+   c[35] = 35;
+   c[84] = 84;
+   c[24] = 24;
+   c[29] = 29;
+   c[28] = 28;
+   c[43] = 43;
    return c;
 }
 
@@ -25,32 +56,31 @@ int test()
    }
    cout << "----------> operators <----------" << endl;
    {
-		Map c = ::basic();
-		Map c2 = ::basic();
-		c2[1] = c[2];
-		cout << "operator==: " << (c == c2) << endl;
-		cout << "operator!=: " << (c != c2) << endl;
-		cout << "operator<: " << (c < c2) << endl;
-		cout << "operator>: " << (c > c2) << endl;
-		cout << "operator<=: " << (c <= c2) << endl;
-		cout << "operator>=: " << (c >= c2) << endl;
+      Map c = ::basic();
+      Map c2 = ::basic();
+      c2[1] = c[2];
+      cout << "operator==: " << (c == c2) << endl;
+      cout << "operator!=: " << (c != c2) << endl;
+      cout << "operator<: " << (c < c2) << endl;
+      cout << "operator>: " << (c > c2) << endl;
+      cout << "operator<=: " << (c <= c2) << endl;
+      cout << "operator>=: " << (c >= c2) << endl;
       c2[-1] = 2;
-		cout << "operator==: " << (c == c2) << endl;
-		cout << "operator!=: " << (c != c2) << endl;
-		cout << "operator<: " << (c < c2) << endl;
-		cout << "operator>: " << (c > c2) << endl;
-		cout << "operator<=: " << (c <= c2) << endl;
-		cout << "operator>=: " << (c >= c2) << endl;
-		c2 = c;
-		cout << "operator==: " << (c == c2) << endl;
-		cout << "operator!=: " << (c != c2) << endl;
-		cout << "operator<: " << (c < c2) << endl;
-		cout << "operator>: " << (c > c2) << endl;
-		cout << "operator<=: " << (c <= c2) << endl;
-		cout << "operator>=: " << (c >= c2) << endl;
+      cout << "operator==: " << (c == c2) << endl;
+      cout << "operator!=: " << (c != c2) << endl;
+      cout << "operator<: " << (c < c2) << endl;
+      cout << "operator>: " << (c > c2) << endl;
+      cout << "operator<=: " << (c <= c2) << endl;
+      cout << "operator>=: " << (c >= c2) << endl;
+      c2 = c;
+      cout << "operator==: " << (c == c2) << endl;
+      cout << "operator!=: " << (c != c2) << endl;
+      cout << "operator<: " << (c < c2) << endl;
+      cout << "operator>: " << (c > c2) << endl;
+      cout << "operator<=: " << (c <= c2) << endl;
+      cout << "operator>=: " << (c >= c2) << endl;
       cout << endl;
-
-	}
+   }
    cout << "----------> constructors <----------" << endl;
    {
       Map c;
@@ -80,15 +110,37 @@ int test()
    cout << "----------> erase <----------" << endl;
    {
       Map c = ::basic();
+      cout << "erase 2: " << c.erase(2) << endl;
       cout << "erase 1: " << c.erase(1) << endl;
-      cout << "erase 2: " << c.erase(2) << endl;
-      print_map<Map>(c);
       cout << "erase 0: " << c.erase(0) << endl;
+      cout << "erase 25: " << c.erase(25) << endl;
+      cout << "erase 42: " << c.erase(42) << endl;
+      cout << "erase 30: " << c.erase(30) << endl;
+      cout << "erase 27: " << c.erase(30) << endl;
       print_map<Map>(c);
-      c[0] = 1000;
-      c[2] = 999999;
-      cout << "erase 1000: " << c.erase(1000) << endl;
-      cout << "erase 2: " << c.erase(2) << endl;
+      // erase last
+      cout << "erase 43 (last): " << c.erase(43) << endl;
+      print_map<Map>(c);
+      // erase root
+      cout << "erase 10 (root): " << c.erase(10) << endl;
+      print_map<Map>(c);
+      /* result for basic bst:
+            15
+           /  \
+          5    21
+           \    \
+            8    35
+                /  \
+               28  84
+              / \
+            23  29
+             \
+             24
+      */
+      // erase root last
+      c = Map();
+      c[10] = 10;
+      cout << "erase 10 (root last): " << c.erase(10) << endl;
       print_map<Map>(c);
    }
 
