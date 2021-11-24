@@ -212,6 +212,14 @@ int test()
       // cout << "find 50: " << (k != c2.end()) << endl;
       // cout << "count 50: " << c2.count(50) << endl;
    }
+   cout << "----------> bound <----------" << endl;
+   {
+      Map c(::basic());
+      Map::iterator it = c.lower_bound(2);
+      cout << "lower_bound: " << it->first << endl;
+      it = c.upper_bound(2);
+      cout << "upper_bound: " << it->first << endl;
+   }
    const_test();
    return 0;
 }
@@ -262,16 +270,24 @@ int const_test()
    }
    cout << "----------> find & count <----------" << endl;
    {
-      const Map c2(::basic());
-      Map::const_iterator l = c2.find(2);
-      cout << "find 2: " << (l != c2.end()) << endl;
+      Map c2(::basic());
+      Map::const_iterator it = c2.find(2);
+      cout << "find 2: " << (it != c2.end()) << endl;
       cout << "count 2: " << c2.count(2) << endl;
-      Map::const_iterator j = c2.find(42);
-      cout << "find 42: " << (j != c2.end()) << endl;
+      it = c2.find(42);
+      cout << "find 42: " << (it != c2.end()) << endl;
       cout << "count 42: " << c2.count(42) << endl;
-      Map::const_iterator k = c2.find(50);
-      cout << "find 50: " << (k != c2.end()) << endl;
+      it = c2.find(50);
+      cout << "find 50: " << (it != c2.end()) << endl;
       cout << "count 50: " << c2.count(50) << endl;
+   }
+   cout << "----------> bound <----------" << endl;
+   {
+      Map c(::basic());
+      Map::const_iterator it = c.lower_bound(2);
+      cout << "lower_bound: " << it->first << endl;
+      it = c.upper_bound(2);
+      cout << "upper_bound: " << it->first << endl;
    }
    return 0;
 }
